@@ -3,24 +3,42 @@
 
 class Point2f
 {
-	Point2f operator+ (const Point2f& a) const
-	{
-		Point2f tmp;
+    public:
+
+	    Point2f operator+ (const Point2f& a) const
+	    {
+			Point2f tmp;
 		tmp.x = x + a.x;
-		tmp.y = y + a.y;
+		    tmp.y = y + a.y;
 
-		return tmp;
-	}
+		    return tmp;
+	    }
 
-	Point2f& operator+= (const Point2f& a)
-	{
-		x = x + a.x;
-		y = y + a.y;
+		Point2f& operator+= (const Point2f& a)
+		{
+			x = x + a.x;
+			y = y + a.y;
 
-		return (*this);
-	}
+			return (*this);
+		}
 
-	public:
+		Point2f operator- (const Point2f& a) const
+		{
+			Point2f tmp;
+			tmp.x = x - a.x;
+			tmp.y = y - a.y;
+
+			return tmp;
+		}
+
+		Point2f& operator+= (const Point2f& a)
+		{
+			x = x - a.x;
+			y = y - a.y;
+
+			return(*this);
+		}
+
 		float x, y;
 		
 

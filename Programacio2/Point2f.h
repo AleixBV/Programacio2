@@ -31,7 +31,7 @@ class Point2f
 			return tmp;
 		}
 
-		Point2f& operator+= (const Point2f& a)
+		Point2f& operator-= (const Point2f& a)
 		{
 			x = x - a.x;
 			y = y - a.y;

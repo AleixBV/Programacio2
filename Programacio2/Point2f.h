@@ -8,7 +8,7 @@ class Point2f
 	    Point2f operator+ (const Point2f& a) const
 	    {
 			Point2f tmp;
-		tmp.x = x + a.x;
+		    tmp.x = x + a.x;
 		    tmp.y = y + a.y;
 
 		    return tmp;
@@ -16,8 +16,8 @@ class Point2f
 
 		Point2f& operator+= (const Point2f& a)
 		{
-			x = x + a.x;
-			y = y + a.y;
+			x += a.x;
+			y += a.y;
 
 			return (*this);
 		}
@@ -33,8 +33,8 @@ class Point2f
 
 		Point2f& operator-= (const Point2f& a)
 		{
-			x = x - a.x;
-			y = y - a.y;
+			x -= a.x;
+			y -= a.y;
 
 			return(*this);
 		}

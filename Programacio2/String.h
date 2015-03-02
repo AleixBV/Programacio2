@@ -2,104 +2,56 @@
 #define _String_
 
 #include <string.h>
+#include <string.h>
 #include <stdio.h>
+#include <windows.h>
 
+#define TMP_STRING_SIZE 4096
 
 class String
 {
-	unsigned int size;//of memory
-	char* string;
+	void alloc(unsigned int size);
 
 public:
 
-	String()
-	{
-		size = 1;
-		string = new char[size];
-		string[0] = '\0';
-	}
+	unsigned int size;//of memory
+	char* string;
 
-	String(const char* x)
-	{
-		size = strlen(x) + 1;
-		string = new char[size];
-		strcpy_s(string, size, x);
-	}
 
-	String(const char* format, ...)
-	{
-		size = 0;
 
-		if (format != NULL)
-		{
-			static char tmp[TMP_STRING_SIZE];
-			static va_list ap;
+	String();
 
-			//Construct thes tring from variable arguments
-			va_start(ap, format);
-			int res = vsprintf_s(tmp, TMP_STRING_SIZE, format, ap);
-			va_end(ap);
+	String(const char* format, ...);
 
-			if (res > 0)
-			{
-				Alloc(res + 1);
-				strcpy_s(str, size, tmp);
-			}
-		}
+	String(const String& s);
 
-		if (size == 0)
-		{
-
-		}
-	}
-
-	String(const String&)
-	{
-		size = strnlen(String&) + 1;
-		string = new char[size];
-		strcpy_s(string, size, String&);
-	}
+	~String();
 
 	//Operators
-	String operator=s(const String& s)
-	{
-		if (s != NULL)
-		{
-			strcpy_s(*this, s);
-		}
-	}
+	bool operator==(const String& s) const;
 
-	String operator=(const char* string)
-	{
-		if (string != NULL)
-		{
-			if (strlen(string) + > size)
-			{
-				delete[] str;
-				Alloc(strlen(string) + 1);
-			}
-			else
-			{
-				Clear();
-			}
-			strcpy_S(str, size, string);
-		}
-		else
-		{
-			Clear();
-		}
-		return(*this);
-	}
+	bool operator==(const char* s) const;
 
+	bool operator!=(const String& s) const;
 
+	bool operator!=(const char* s) const;
 
-	~String()
-	{
-		delete[] string;
-	}
+	String operator=(const String& s);
 
-	int len() const
-	{
-		return strlen(string);
-	}
+	String operator=(const char* s);
+
+	String operator+=(const String& s);
+
+	String operator+=(const char* s);
+
+	//Utility
+	int length() const;
+
+	int capacity() const;
+
+	char* getString() const;
+
+	void clear();
 };
+
+#endif

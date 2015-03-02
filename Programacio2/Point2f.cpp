@@ -38,6 +38,16 @@ Point2f Point2f::operator-= (const Point2f& a)
 	return(*this);
 }
 
+bool Point2f::operator== (const Point2f& a) const
+{
+	return (x == a.x) && (y == a.y);
+}
+
+bool Point2f::operator!= (const Point2f& a) const
+{
+	return (x != a.x) && (y != a.y);
+}
+
 void Point2f::setZero()
 {
 	x = y = 0.0f;
@@ -46,4 +56,9 @@ void Point2f::setZero()
 bool Point2f::isZero() const
 {
 	return x == 0.0f && y == 0.0f;
+}
+
+float Point2f::distanceTo(const Point2f& a) const
+{
+	return (sqrt((x - a.x) * (x - a.x)) + ((y - a.y) * (y - a.y)));
 }

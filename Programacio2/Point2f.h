@@ -7,17 +7,23 @@ class Point2f
 
 		float x, y;
 
-		Point2f operator+ (const Point2f& a) const;
+		Point2f operator+(const Point2f& a) const;
 
-		Point2f operator- (const Point2f& a) const;
+		Point2f operator-(const Point2f& a) const;
 
-		Point2f operator+= (const Point2f& a);
+		Point2f operator+=(const Point2f& a);
 
-		Point2f operator-= (const Point2f& a);
+		Point2f operator-=(const Point2f& a);
 		
+		bool operator==(const Point2f& a) const;
+
+		bool operator!=(const Point2f& a) const;
+
 		void setZero();
 
 		bool isZero() const;
+
+		float distanceTo(const Point2f& a) const;
 };
 
 #endif

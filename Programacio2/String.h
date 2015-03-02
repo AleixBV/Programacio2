@@ -45,7 +45,7 @@ public:
 	String operator+=(const char* s);
 
 	//Utility
-	int length() const;
+	unsigned int length() const;
 
 	int capacity() const;
 

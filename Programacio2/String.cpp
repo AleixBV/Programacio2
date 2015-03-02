@@ -128,7 +128,7 @@ String String::operator+=(const char* s)
 }
 
 //Utility
-int String::length() const
+unsigned int String::length() const
 {
 	return strlen(string);
 }

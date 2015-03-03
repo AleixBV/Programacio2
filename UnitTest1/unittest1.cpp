@@ -145,22 +145,22 @@ namespace UnitTest2
 
 		TEST_METHOD(TestMethod_constructChain)
 		{
-			String s("hellow", " world");
+			String s("hello", " world");
 
-			Assert::IsTrue(s.string == "hellow world");
+			Assert::IsTrue(s.string == "hello world");
 		}
 
 		TEST_METHOD(TestMethod_constructChainClass)
 		{
-			String a = "hellow world";
+			String a = "hello world";
 			String s(a);
 
-			Assert::IsTrue(s.string == "hellow world");
+			Assert::IsTrue(s.string == "hello world");
 		}
 
 		TEST_METHOD(TestMethod_destructor)
 		{
-			String s = "hellow world";
+			String s = "hello world";
 			s.~String();
 
 			Assert::IsTrue(s.string == NULL);
@@ -168,23 +168,23 @@ namespace UnitTest2
 
 		TEST_METHOD(TestMethod_operatorEqualEqual)
 		{
-			String s = "hellow world";
-			String a = "hellow world";
+			String s = "hello world";
+			String a = "hello world";
 
 			Assert::IsTrue(s == a);
 		}
 
 		TEST_METHOD(TestMethod_operatorEqualEqualClass)
 		{
-			String s = "hellow world";
-			String a = "hellow world";
+			String s = "hello world";
+			String a = "hello world";
 
 			Assert::IsTrue(s == a);
 		}
 
 		TEST_METHOD(TestMethod_operatorNotEqual)
 		{
-			String s = "hellow world";
+			String s = "hello world";
 			String a = "bye";
 
 			Assert::IsTrue(s != a);
@@ -192,7 +192,7 @@ namespace UnitTest2
 
 		TEST_METHOD(TestMethod_operatorNotEqualClass)
 		{
-			String s = "hellow world";
+			String s = "hello world";
 			String a = "bye";
 
 			Assert::IsTrue(s != a);
@@ -200,7 +200,7 @@ namespace UnitTest2
 
 		TEST_METHOD(TestMethod_operatorEqual)
 		{
-			String s = "hellow";
+			String s = "hello";
 			String a = s;
 
 			Assert::IsTrue(a == s);
@@ -208,7 +208,7 @@ namespace UnitTest2
 
 		TEST_METHOD(TestMethod_operatorEqualClass)
 		{
-			String s = "hellow";
+			String s = "hello";
 			String a = s;
 
 			Assert::IsTrue(a == s);
@@ -216,51 +216,51 @@ namespace UnitTest2
 
 		TEST_METHOD(TestMethod_operatorPlusEqual)
 		{
-			String s = "hellow";
+			String s = "hello";
 			String a = " world";
 
 			s += a;
 
-			Assert::IsTrue(s == "hellow world");
+			Assert::IsTrue(s == "hello world");
 		}
 
 		TEST_METHOD(TestMethod_operatorPlusEqualClass)
 		{
-			String s = "hellow";
+			String s = "hello";
 			String a = " world";
 
 			s += a;
 
-			Assert::IsTrue(s == "hellow world");
+			Assert::IsTrue(s == "hello world");
 		}
 
 		TEST_METHOD(TestMethod_operatorLength)
 		{
-			String s = "hellow";
+			String s = "hello";
 
-			Assert::IsTrue(s.length() == 6);
+			Assert::IsTrue(s.length() == 5);
 		}
 
 		TEST_METHOD(TestMethod_operatorCapacity)
 		{
-			String s = "hellow";
+			String s = "hello";
 
-			Assert::IsTrue(s.capacity() == 7);
+			Assert::IsTrue(s.capacity() == 6);
 		}
 
 		TEST_METHOD(TestMethod_operatorGetString)
 		{
-			String s = "hellow";
+			String s = "hello";
 
-			Assert::IsTrue(s.getString() == "hellow");
+			Assert::IsTrue(s.getString() == "hello");
 		}
 
 		TEST_METHOD(TestMethod_operatorClear)
 		{
-			String s = "hellow";
+			String s = "hello";
 			s.clear();
 
-			Assert::IsTrue(s == NULL);
+			Assert::IsTrue(s.string[0] == '\0' || s.string == NULL);
 		}
 	};
 }

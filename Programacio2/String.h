@@ -10,8 +10,6 @@
 
 class String
 {
-	void alloc(unsigned int size);
-
 public:
 
 	unsigned int size;//of memory
@@ -40,9 +38,9 @@ public:
 
 	String operator=(const char* s);
 
-	String operator+=(const String& s);
+	String& operator+=(const String& s);
 
-	String operator+=(const char* s);
+	String& operator+=(const char* s);
 
 	//Utility
 	unsigned int length() const;

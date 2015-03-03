@@ -165,7 +165,7 @@ namespace UnitTest2
 			String s = "hello";
 			s.~String();
 
-			Assert::IsTrue(s.string == "\0");
+			Assert::IsNull(s.string);
 		}
 
 		TEST_METHOD(TestMethod_operatorEqualEqual)

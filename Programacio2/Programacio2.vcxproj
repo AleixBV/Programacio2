@@ -69,12 +69,14 @@
   <ItemGroup>
     <ClInclude Include="Log.h" />
     <ClInclude Include="Point2f.h" />
+    <ClInclude Include="Point2fTemplate.h" />
     <ClInclude Include="String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point2f.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

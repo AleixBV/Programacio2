@@ -2,12 +2,13 @@
 #include "CppUnitTest.h"
 #include "../Programacio2/Point2f.cpp"
 #include "../Programacio2/String.cpp"
+#include "../Programacio2/Point2fTemplate.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace UnitTest1
+namespace UnitTestPoint2f
 {		
-	TEST_CLASS(UnitTest1)
+	TEST_CLASS(UnitTestPoint2f)
 	{
 	public:
 
@@ -130,9 +131,9 @@ namespace UnitTest1
 	};
 }
 
-namespace UnitTest2
+namespace UnitTestString
 {
-	TEST_CLASS(UnitTest2)
+	TEST_CLASS(UnitTestString)
 	{
 	public:
 
@@ -261,6 +262,26 @@ namespace UnitTest2
 			s->clear();
 
 			Assert::IsTrue(s->string[0] == '\0');
+		}
+	};
+}
+
+namespace UnitTestPoint2fTemplate
+{
+	TEST_CLASS(UnitTestPoint2fTemplate)
+	{
+	public:
+		
+		TEST_METHOD(TestMethod_Point2fTemplateInt)
+		{
+			Point2fTemplate<int> a;
+			Point2fTemplate<int> b;
+
+			a.x = a.y = 5;
+			b = a;
+
+			Assert::AreEqual(b.x, 5);
+			Assert::AreEqual(b.y, 5);
 		}
 	};
 }

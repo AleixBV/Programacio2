@@ -62,3 +62,4 @@ float Point2f::distanceTo(const Point2f& a) const
 {
 	return sqrt((x - a.x) * (x - a.x)) + ((y - a.y) * (y - a.y));
 }
+

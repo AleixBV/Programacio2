@@ -24,14 +24,16 @@ String::String(const char* format, ...)
 
 		if (res > 0)
 		{
-			string = new char[res + 1];
+			size = res + 1;
+			string = new char[size];
 			strcpy_s(string, size, tmp);
 		}
 	}
 
 	if (size == 0)
 	{
-		string = new char[1];
+		size = 1;
+		string = new char[size];
 		clear();
 	}
 }
@@ -106,37 +108,39 @@ String String::operator=(const char* s)
 	return (*this);
 }
 
-String& String::operator+=(const String& a)
+String& String::operator+=(const String& s)
 {
-	if (size < strlen(string) + strlen(a.string))
+	if (size < strlen(string) + strlen(s.string))
 	{
 		char* string2 = new char[strlen(string) + 1];
 		strcpy_s(string2, strlen(string) + 1, string);
-		size = strlen(string) + strlen(a.string) + 1;
 		delete[]string;
+		size = strlen(string) + strlen(s.string) + 1;
 		string = new char[size];
 		strcpy_s(string, strlen(string2), string2);
+		delete[]string2;
 	}
 
-	strcat_s(string, strlen(a.string), a.string);
+	strcat_s(string, strlen(s.string), s.string);
 	return (*this);
 }
 
-String& String::operator+=(const char* a)
+String& String::operator+=(const char* s)
 {
-	if (a != NULL)
+	if (s != NULL)
 	{
-		if (size < strlen(string) + strlen(a))
+		if (size < strlen(string) + strlen(s))
 		{
 			char* string2 = new char[strlen(string) + 1];
 			strcpy_s(string2, strlen(string) + 1, string);
-			size = strlen(string) + strlen(a) + 1;
 			delete[]string;
+			size = strlen(string) + strlen(s) + 1;
 			string = new char[size];
 			strcpy_s(string, strlen(string2), string2);
+			delete[]string2;
 		}
 
-		strcat_s(string, strlen(a), a);
+		strcat_s(string, strlen(s), s);
 	}
 	return (*this);
 }
@@ -161,8 +165,6 @@ void String::clear()
 {
 	if (string != NULL)
 	{
-		//delete[] string;
-		//string = new char[1];
 		string[0] = '\0';
 	}
 

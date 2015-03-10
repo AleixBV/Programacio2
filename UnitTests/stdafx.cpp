@@ -1,5 +1,5 @@
 // stdafx.cpp: archivo de código fuente que contiene solamente las inclusiones estándar
-// UnitTest1.pch será el encabezado precompilado
+// UnitTests.pch será el encabezado precompilado
 // stdafx.obj contiene la información de tipos precompilada
 
 #include "stdafx.h"

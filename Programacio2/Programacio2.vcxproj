@@ -67,6 +67,7 @@
     <Text Include="CodeStyle.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DoubleLinkedList.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Point2f.h" />
@@ -74,7 +75,6 @@
     <ClInclude Include="String.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point2f.cpp" />
     <ClCompile Include="String.cpp" />

@@ -7,12 +7,13 @@ struct node
 {
 	int value;
 	node* next;
+	node* before;
 };
 
-class SList
+class DSList
 {
 	node * start;
-	SList() : start(NULL){}
+	DSList() : start(NULL){}
 	void add(int value)
 	{
 		node* newNode = new node;

@@ -7,7 +7,7 @@ struct node
 {
 	int value;
 	node* next;
-	node* before;
+	node* previous;
 };
 
 class DSList
@@ -28,6 +28,7 @@ class DSList
 			}
 		}
 		tmp->next = newNode;
+		newNode->previous = tmp;
 	}
 
 	void del(node* delNode)
@@ -47,6 +48,8 @@ class DSList
 					tmp = tmp->next;
 				}
 				tmp->next = delNode->next;
+				tmp = tmp->next;
+				tmp->previous = delNode->previous;
 			}
 			else
 			{

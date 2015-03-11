@@ -3,11 +3,13 @@
 
 #include <stdio.h>
 
+template<struct TYPE>
 struct node
 {
-	int value;
+	TYPE value;
 	node* next;
 };
+
 
 class SList
 {

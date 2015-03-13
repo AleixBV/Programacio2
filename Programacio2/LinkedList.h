@@ -10,7 +10,7 @@ struct node
 	node* next;
 };
 
-
+template<class TYPE1>
 class SList
 {
 	node * start;

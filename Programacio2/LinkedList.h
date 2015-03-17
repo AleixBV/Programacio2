@@ -10,12 +10,12 @@ struct node
 	node* next;
 };
 
-template<class TYPE1>
+template<class TYPE>
 class SList
 {
-	node * start;
+	node* start;
 	SList() : start(NULL){}
-	void add(int value)
+	void add(TYPE value)
 	{
 		node* newNode = new node;
 		newNode->value = value;

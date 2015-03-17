@@ -3,18 +3,20 @@
 
 #include <stdio.h>
 
+template<struct TYPE>
 struct node
 {
-	int value;
+	TYPE value;
 	node* next;
 	node* previous;
 };
 
+template<struct TYPE>
 class DSList
 {
-	node * start;
+	node* start;
 	DSList() : start(NULL){}
-	void add(int value)
+	void add(TYPE value)
 	{
 		node* newNode = new node;
 		newNode->value = value;

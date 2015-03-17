@@ -45,9 +45,9 @@ public:
 	//Utility
 	unsigned int length() const;
 
-	int capacity() const;
+	unsigned int capacity() const;
 
-	char* getString() const;
+	const char* getString() const;
 
 	void clear();
 };

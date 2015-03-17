@@ -57,6 +57,36 @@ class SList
 		}
 	}
 
+	void del(unsigned int x)
+	{
+			if (start != NULL)
+			{
+				node* tmp = start;
+				node* tmp2;
+				if (x == 0)
+				{
+					start = start->next;
+					delete tmp;
+				}
+				for (unsigned int i = 1; i < x; i ++)
+				{
+					if (tmp == NULL)
+					{
+						delete delNode;
+						return;
+					}
+					tmp = tmp->next;
+				}
+				tmp2 = tmp->next;
+				tmp->next = tmp2->next;
+			}
+			else
+			{
+				start = start->next;
+			}
+			delete tmp2;
+	}
+
 	void delAll()
 	{
 		if (start != NULL)

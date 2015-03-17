@@ -25,7 +25,7 @@ public:
 	
 	void reallocate(unsigned int newMemorySize)
 	{
-
+		allocatedMemory = newMemorySize;
 	}
 
 	void pushBack(int value)

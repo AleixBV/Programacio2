@@ -112,7 +112,7 @@ String& String::operator+=(const String& s)
 {
 	if (size < strlen(string) + strlen(s.string))
 	{
-		char* string2 = new char[strlen(string) + 1];
+		char string2[TMP_STRING_SIZE];
 		strcpy_s(string2, strlen(string) + 1, string);
 		delete[]string;
 		size = strlen(string) + strlen(s.string) + 1;
@@ -131,7 +131,7 @@ String& String::operator+=(const char* s)
 	{
 		if (size < strlen(string) + strlen(s))
 		{
-			char* string2 = new char[strlen(string) + 1];
+			char string2[TMP_STRING_SIZE];
 			strcpy_s(string2, strlen(string) + 1, string);
 			delete[]string;
 			size = strlen(string) + strlen(s) + 1;
@@ -151,12 +151,12 @@ unsigned int String::length() const
 	return strlen(string);
 }
 
-int String::capacity() const
+unsigned int String::capacity() const
 {
 	return size;
 }
 
-char* String::getString() const
+const char* String::getString() const
 {
 	return (string);
 }

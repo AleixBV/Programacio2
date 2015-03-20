@@ -61,6 +61,33 @@ class DSList
 		}
 	}
 
+	void del(unsigned int x)
+	{
+		if (start != NULL)
+		{
+			node* tmp = start;
+			node* tmp2;
+			if (x == 0)
+			{
+				start = start->next;
+				delete tmp;
+			}
+			for (unsigned int i = 1; i < x; i++)
+			{
+				if (tmp == NULL)
+				{
+					return;
+				}
+				tmp = tmp->next;
+			}
+			tmp2 = tmp->next;
+			tmp->next = tmp2->next;
+			tmp = tmp2->next;
+			tmp->previous = tmp2->previous;
+		}
+		delete tmp2;
+	}
+
 	void delAll()
 	{
 		if (start != NULL)

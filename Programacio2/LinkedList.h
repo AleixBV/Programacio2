@@ -72,17 +72,12 @@ class SList
 				{
 					if (tmp == NULL)
 					{
-						delete delNode;
 						return;
 					}
 					tmp = tmp->next;
 				}
 				tmp2 = tmp->next;
 				tmp->next = tmp2->next;
-			}
-			else
-			{
-				start = start->next;
 			}
 			delete tmp2;
 	}

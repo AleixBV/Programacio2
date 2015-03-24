@@ -2,11 +2,12 @@
 #include "CppUnitTest.h"
 #include "../Programacio2/Point2f.cpp"
 #include "../Programacio2/String.cpp"
+#include "../Programacio2/DynamicArray.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace UnitTest1
-{		
+namespace UnitTest
+{
 	TEST_CLASS(UnitTest1)
 	{
 	public:
@@ -94,7 +95,7 @@ namespace UnitTest1
 
 			Assert::IsTrue(point1 != point2);
 		}
-		
+
 		TEST_METHOD(TestMethod_isZero)
 		{
 			Point2f point;
@@ -138,10 +139,10 @@ namespace UnitTest2
 
 		TEST_METHOD(TestMethod_constructEmpty)
 		{
-			String s("world");
-			
+			String s;
+
 			Assert::IsTrue(s.size == 1);
-			Assert::AreEqual(s.string, "");
+			Assert::AreEqual(s.string, "\0");
 		}
 
 		TEST_METHOD(TestMethod_constructChain)
@@ -165,7 +166,7 @@ namespace UnitTest2
 			String s("hello");
 			s.~String();
 
-			Assert::IsTrue(s.string[0] == '\0');
+			Assert::IsTrue(s.string == NULL);
 		}
 
 		TEST_METHOD(TestMethod_operatorEqualEqual)
@@ -201,37 +202,37 @@ namespace UnitTest2
 		TEST_METHOD(TestMethod_operatorEqual)
 		{
 			String s("world");
-			s.string = "hello";
+			s = "hello";
 
-			Assert::IsTrue(s.string == "hello");
+			Assert::IsTrue(s == "hello");
 		}
 
 		TEST_METHOD(TestMethod_operatorEqualClass)
 		{
 			String s("hello");
 			String a("world");
-			a.string = s.string;
+			a = s;
 
-			Assert::IsTrue(a.string == s.string);
+			Assert::IsTrue(a == s);
 		}
 
 		TEST_METHOD(TestMethod_operatorPlusEqual)
 		{
-			String* s = new String("hello");
+			String s("hello");
 
-			*s += " world";
+			s += " world";
 
-			Assert::IsTrue(s->string == "hello world");
+			Assert::IsTrue(s == "hello world");
 		}
 
 		TEST_METHOD(TestMethod_operatorPlusEqualClass)
 		{
-			String* s = new String("hello");
-			String* a = new String(" world");
+			String s("hello");
+			String a(" world");
 
-			*s += *a;
+			s += a;
 
-			Assert::AreEqual(s->string, "hello world");
+			Assert::IsTrue(s == "hello world");
 		}
 
 		TEST_METHOD(TestMethod_operatorLength)
@@ -261,6 +262,133 @@ namespace UnitTest2
 			s.clear();
 
 			Assert::IsTrue(s.string[0] == '\0');
+		}
+	};
+}
+
+namespace UnitTest3
+{
+	TEST_CLASS(UnitTest3)
+	{
+	public:
+
+		TEST_METHOD(DynArray_ctor)
+		{
+			DynArray<int> array;
+			Assert::AreEqual((int)array.getCapacity(), NULL);
+		}
+
+		TEST_METHOD(DynArray_ctor_capacity)
+		{
+			DynArray<int> array(33);
+			Assert::AreEqual((int)array.getCapacity(), 33);
+		}
+
+		TEST_METHOD(DynArray_push_back)
+		{
+			DynArray<int> array;
+
+			array.pushBack(1);
+			array.pushBack(2);
+			array.pushBack(3);
+			Assert::AreEqual((int)array.getCapacity(), 3);
+			Assert::AreEqual((int)array.count(), 3);
+		}
+
+		TEST_METHOD(DynArray_pop)
+		{
+			DynArray<int> array;
+
+			array.pushBack(1);
+			array.pushBack(2);
+			array.pushBack(3);
+
+			int a, b;
+
+			Assert::IsTrue(array.pop(a));
+			Assert::IsTrue(array.pop(b));
+
+			Assert::AreEqual((int)array.getCapacity(), 4);
+			Assert::AreEqual((int)array.count(), 1);
+			Assert::AreEqual(a, 3);
+			Assert::AreEqual(b, 2);
+		}
+
+		TEST_METHOD(DynArray_clear)
+		{
+			DynArray<int> array;
+
+			array.pushBack(1);
+			array.pushBack(2);
+			array.pushBack(3);
+			array.clear();
+
+			Assert::AreEqual((int)array.getCapacity(), 3);
+			Assert::AreEqual((int)array.count(), 0);
+		}
+
+
+		TEST_METHOD(DynArray_op)
+		{
+			DynArray<int> array;
+
+			array.pushBack(1);
+			array.pushBack(2);
+			array.pushBack(3);
+
+			Assert::AreEqual(array[0], 1);
+			Assert::AreEqual(array[1], 2);
+			Assert::AreEqual(array[2], 3);
+		}
+
+		TEST_METHOD(DynArray_at)
+		{
+			DynArray<int> array;
+
+			array.pushBack(1);
+			array.pushBack(2);
+			array.pushBack(3);
+
+			Assert::AreEqual(*(array.at(0)), 1);
+			Assert::AreEqual(*(array.at(1)), 2);
+			Assert::AreEqual(*(array.at(2)), 3);
+			Assert::IsNull(array.at(3));
+		}
+
+		TEST_METHOD(DynArray_resize)
+		{
+			DynArray<int> array;
+
+			for (int i = 0; i < 999; ++i)
+			{
+				array.pushBack(i);
+			}
+
+			Assert::AreEqual(*(array.at(900)), 900);
+			Assert::IsNull(array.at(1000));
+
+			Assert::AreEqual((int)array.getCapacity(), 999);
+			Assert::AreEqual((int)array.count(), 999);
+		}
+
+		TEST_METHOD(DynArray_insert)
+		{
+			DynArray<int> array;
+
+			for (int i = 0; i < 16; ++i)
+			{
+				array.pushBack(i);
+			}
+
+			array.insert(999, 3);
+			array.insert(888, 17);
+			array.insert(777, 50);
+
+			Assert::IsFalse(array.insert(777, 50));
+			Assert::AreEqual((int)array.getCapacity(), 18);
+			Assert::AreEqual((int)array.count(), 18);
+			Assert::AreEqual((int)array[3], 999);
+			Assert::AreEqual((int)array[17], 888);
 		}
 	};
 }

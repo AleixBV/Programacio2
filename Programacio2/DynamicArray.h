@@ -12,9 +12,9 @@ private:
 
 public:
 	//Constructors
-	DynArray() : data(NULL), allocatedMemory('\0'), numElements('\0'){}
+	DynArray() : data(NULL), allocatedMemory(1), numElements(0){}
 
-	DynArray(unsigned int memSize) : data(NULL), numElements('\0')
+	DynArray(unsigned int memSize) : data(NULL), numElements(0)
 	{
 		reallocate(memSize);
 	}

@@ -77,28 +77,34 @@ bool String::operator!=(const char* s)const
 	return false;
 }
 
-String String::operator=(const String& s)
+const String String::operator=(const String& s)
 {
 	if ((s.length() + 1) > size)
 	{
-		string = new char[s.length() + 1];
+		delete[] string;
+		size = s.length() + 1;
+		string = new char[size];
 	}
 	else
 		clear();
+
 	strcpy_s(string, size, s.string);
 	return (*this);
 }
 
-String String::operator=(const char* s)
+const String String::operator=(const char* s)
 {
 	if (s != NULL)
 	{
 		if (strlen(s) + 1 > size)
 		{
-			string = new char[strlen(s) + 1];
+			delete[] string;
+			size = strlen(s) + 1;
+			string = new char[size];
 		}
 		else
 			clear();
+
 		strcpy_s(string, size, s);
 	}
 	else
@@ -108,39 +114,35 @@ String String::operator=(const char* s)
 	return (*this);
 }
 
-String& String::operator+=(const String& s)
+const String& String::operator+=(const String& s)
 {
 	if (size < strlen(string) + strlen(s.string))
 	{
-		char string2[TMP_STRING_SIZE];
-		strcpy_s(string2, strlen(string) + 1, string);
-		delete[]string;
+		char* string2 = string;
 		size = strlen(string) + strlen(s.string) + 1;
 		string = new char[size];
-		strcpy_s(string, strlen(string2), string2);
-		delete[]string2;
+		strcpy_s(string, size, string2);
+		delete[] string2;
 	}
 
-	strcat_s(string, strlen(s.string), s.string);
+	strcat_s(string, size, s.string);
 	return (*this);
 }
 
-String& String::operator+=(const char* s)
+const String& String::operator+=(const char* s)
 {
 	if (s != NULL)
 	{
 		if (size < strlen(string) + strlen(s))
 		{
-			char string2[TMP_STRING_SIZE];
-			strcpy_s(string2, strlen(string) + 1, string);
-			delete[]string;
+			char* string2 = string;
 			size = strlen(string) + strlen(s) + 1;
 			string = new char[size];
-			strcpy_s(string, strlen(string2), string2);
-			delete[]string2;
+			strcpy_s(string, size, string2);
+			delete[] string2;
 		}
 
-		strcat_s(string, strlen(s), s);
+		strcat_s(string, size, s);
 	}
 	return (*this);
 }

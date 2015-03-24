@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{88D0D53A-EDF1-430D-89E5-929A9C24F470}</ProjectGuid>
+    <ProjectGuid>{BFA32805-FE85-4626-A96B-54E878DCB792}</ProjectGuid>
     <RootNamespace>Programacio2</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -64,7 +64,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="CodeStyle.txt" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Point2f.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoubleLinkedList.h" />
@@ -76,11 +80,7 @@
     <ClInclude Include="String.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Log.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Point2f.cpp" />
-    <ClCompile Include="String.cpp" />
-    <ClCompile Include="Utilities.cpp" />
+    <Text Include="CodeStyle.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

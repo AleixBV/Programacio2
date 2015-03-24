@@ -1,14 +1,22 @@
 #ifndef _LinkedList_
 #define _LinkedList_
-
+/*
 #include <stdio.h>
 
 template<class TYPE>
 struct node
 {
 	TYPE value;
-	node* next;
-	node* previous;
+	node<TYPE>* next;
+	node<TYPE>* previous;
+
+	inline node(const TYPE& _value)
+	{
+		data = _data;
+		next = previous = NULL;
+	}
+
+	~node(){}
 };
 
 template<struct TYPE>
@@ -16,8 +24,8 @@ class DSList
 {
 public:
 
-	node* start;
-	node* end;
+	node<TYPE>* start;
+	node<TYPE>* end;
 
 private:
 
@@ -41,9 +49,9 @@ public:
 	}
 
 	//Add new item
-	unsigned int add(TYPE value)
+	unsigned int add(const TYPE& value)
 	{
-		node* newNode = new node;
+		node<TYPE>* newNode = new node<TYPE>;
 		newNode->value = value;
 
 		if (start == NULL)
@@ -60,7 +68,7 @@ public:
 	}
 
 	//Deletes an item from the list
-	bool del(node* delNode)
+	bool del(node<TYPE>* delNode)
 	{
 		if (delNode == NULL || start == NULL || end == NULL)
 		{
@@ -149,7 +157,7 @@ public:
 	{
 		if (start != NULL)
 		{
-			node* tmp;
+			node<TYPE>* tmp;
 			while (start != NULL)
 			{
 				tmp = start;
@@ -163,6 +171,6 @@ public:
 
 };
 
-
+*/
 
 #endif

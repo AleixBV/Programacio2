@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-template<struct TYPE>
+template<class TYPE>
 struct node
 {
 	TYPE value;
@@ -14,30 +14,61 @@ struct node
 template<struct TYPE>
 class DSList
 {
+public:
+
 	node* start;
-	DSList() : start(NULL){}
-	void add(TYPE value)
+	node* end;
+
+private:
+
+	unsigned int size;
+
+public:
+
+	//Constructor
+	DSList() : start(NULL), end(NULL){}
+
+	//Destructor
+	~DSList()
+	{
+		delAll();
+	}
+
+	//Get Size
+	unsigned int count()
+	{
+		return size;
+	}
+
+	//Add new item
+	unsigned int add(TYPE value)
 	{
 		node* newNode = new node;
 		newNode->value = value;
-		newNode->next = NULL;
-		node* tmp = start;
 
-		if (tmp != NULL){
-			while (tmp->next != NULL)
-			{
-				tmp = tmp->next;
-			}
+		if (start == NULL)
+		{
+			start = end = newNode;
 		}
-		tmp->next = newNode;
-		newNode->previous = tmp;
+		else
+		{
+			newNode->previous = end;
+			end->next = newNode;
+			end = newNode;
+		}
+		return(++size);
 	}
 
-	void del(node* delNode)
+	//Deletes an item from the list
+	bool del(node* delNode)
 	{
-		if (delNode != NULL)
+		if (delNode == NULL || start == NULL || end == NULL)
 		{
-			if (delNode != start && start != NULL)
+			return false;
+		}
+		else
+		{
+			if (delNode != start || delNode != end)
 			{
 				node* tmp = start;
 				while (tmp->next != delNode)
@@ -53,69 +84,81 @@ class DSList
 				tmp = tmp->next;
 				tmp->previous = delNode->previous;
 			}
-			else
+			else if (delNode == start)
 			{
 				start = start->next;
+				start->previous = NULL;
+			}
+			else
+			{
+				end = end->previous;
+				end->next = NULL;
 			}
 			delete delNode;
+			--size;
+			return(true);
 		}
 	}
 
-	void del(unsigned int x)
+	bool del(unsigned int x)
 	{
-		if (start != NULL)
+		if (start == NULL || end == NULL)
 		{
-			node* tmp = start;
-			node* tmp2;
+			return false;
+		}
+		else
+		{
 			if (x == 0)
 			{
 				start = start->next;
-				delete tmp;
+				return(true);
 			}
+
+			node* tmp = start;
+			node* tmp2;
+			
 			for (unsigned int i = 1; i < x; i++)
 			{
 				if (tmp == NULL)
 				{
-					return;
+					return(false);
 				}
 				tmp = tmp->next;
 			}
 			tmp2 = tmp->next;
-			tmp->next = tmp2->next;
-			tmp = tmp2->next;
-			tmp->previous = tmp2->previous;
+			if (tmp2->next != NULL)
+			{
+				tmp->next = tmp2->next;
+				tmp = tmp2->next;
+				tmp->previous = tmp2->previous;
+			}
+			else
+			{
+				end = end->previous;
+				end->next = NULL;
+			}
 		}
 		delete tmp2;
+		--size;
+		return(true)
 	}
 
+
+	//Destroy and free all mem
 	void delAll()
 	{
 		if (start != NULL)
 		{
-			node* tmp = start;
+			node* tmp;
 			while (start != NULL)
 			{
 				tmp = start;
 				start = start->next;
 				delete tmp;
 			}
-			delete start;
+			start = end = NULL;
+			size = 0;
 		}
-	}
-
-	unsigned int count() const
-	{
-		unsigned int result = 0;
-		node* tmp = start;
-		if (tmp != NULL)
-		{
-			while (tmp->next != NULL)
-			{
-				tmp = tmp->next;
-				result++;
-			}
-		}
-		return (result);
 	}
 
 };

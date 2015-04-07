@@ -12,14 +12,14 @@ struct node
 
 	inline node(const TYPE& _value)
 	{
-		data = _data;
+		data = _value;
 		next = previous = NULL;
 	}
 
 	~node(){}
 };
 
-template<struct TYPE>
+template<class TYPE>
 class DSList
 {
 public:

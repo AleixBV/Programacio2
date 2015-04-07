@@ -8,6 +8,10 @@
 #include "../Programacio2/DynamicArray.h"
 #include "../Programacio2/p2List.h"
 #include "../Programacio2/DoubleLinkedList.h"
+#include "../Programacio2/Stack.h"
+#include "../Programacio2/Qeue.h"
+
+
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -492,3 +496,49 @@ namespace UnitTestExam
 		}*/
 	};
 }
+
+namespace UnitTestStack
+{
+	TEST_CLASS(UnitTestStack)
+	{
+	public:
+		TEST_METHOD(stack_Pop)
+		{
+			Stack<int> a;
+
+			a.pushBack(1);
+			a.pushBack(2);
+			a.pushBack(3);
+
+			int pop;
+
+			a.pop(pop);
+
+			Assert::AreEqual((int)3, pop);
+		}
+	};
+}
+
+namespace UnitTestQeue
+{
+	TEST_CLASS(UnitTestQeue)
+	{
+	public:
+		TEST_METHOD(qeue_Pop)
+		{
+			Qeue<int> a;
+
+			a.push(1);
+			a.push(2);
+			a.push(3);
+
+			int pop;
+
+			a.pop(pop);
+
+			Assert::AreEqual((int)1, pop);
+		}
+		
+	};
+}
+

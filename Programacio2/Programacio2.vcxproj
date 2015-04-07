@@ -80,6 +80,8 @@
     <ClInclude Include="Point2f.h" />
     <ClInclude Include="Point2fTemplate.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Qeue.h" />
+    <ClInclude Include="Stack.h" />
     <ClInclude Include="String.h" />
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,6 @@ public:
 	char* string;
 
 
-
 	String();
 
 	String(const char* format, ...);

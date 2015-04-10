@@ -1,6 +1,6 @@
 #ifndef _LinkedList_
 #define _LinkedList_
-/*
+
 #include <stdio.h>
 
 template<class TYPE>
@@ -171,6 +171,6 @@ public:
 
 };
 
-*/
+
 
 #endif

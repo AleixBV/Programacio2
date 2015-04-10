@@ -3,11 +3,20 @@
 
 #include <stdio.h>
 
-template<struct TYPE>
+template<class TYPE>
 struct node
 {
 	TYPE value;
-	node* next;
+	node<TYPE>* next;
+
+	inline node(const TYPE& _value)
+	{
+		value = _value;
+		next = prev = NULL;
+	}
+
+	~node()
+	{}
 };
 
 template<class TYPE>

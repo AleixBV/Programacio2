@@ -83,6 +83,7 @@
     <ClInclude Include="Qeue.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CodeStyle.txt" />

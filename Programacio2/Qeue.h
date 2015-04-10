@@ -4,19 +4,19 @@
 #include <stdio.h>
 
 template<class TYPE>
-struct node
+struct qNode
 {
 	TYPE value;
-	node<TYPE>* next;
-	node<TYPE>* previous;
+	qNode<TYPE>* next;
+	qNode<TYPE>* previous;
 
-	inline node(const TYPE& _value)
+	inline qNode(const TYPE& _value)
 	{
 		value = _value;
 		next = NULL;
 	}
 
-	~node(){}
+	~qNode(){}
 };
 
 template<class TYPE>
@@ -24,8 +24,8 @@ class Qeue
 {
 public:
 
-node<TYPE>* start;
-node<TYPE>* end;
+qNode<TYPE>* start;
+qNode<TYPE>* end;
 
 private:
 
@@ -55,18 +55,18 @@ return size;
 //push
 void push(const TYPE& value)
 {
-	node<TYPE>* newNode = new node<TYPE>(value);
-	//newNode->value = value;
+	qNode<TYPE>* newqNode = new qNode<TYPE>(value);
+	//newqNode->value = value;
 
 	if (start == NULL)
 	{
-		start = end = newNode;
+		start = end = newqNode;
 	}
 	else
 	{
-		newNode->previous = end;
-		end->next = newNode;
-		end = newNode;
+		newqNode->previous = end;
+		end->next = newqNode;
+		end = newqNode;
 	}
 	size++;
 }
@@ -80,7 +80,7 @@ bool pop(TYPE& value)
 	}
 	else
 	{
-		node<TYPE>* tmp = start;
+		qNode<TYPE>* tmp = start;
 		start = start->next;
 		start->previous = NULL;
 		value = tmp->value;
@@ -104,8 +104,8 @@ bool del(unsigned int x)
 			return(true);
 		}
 
-		node* tmp = start;
-		node* tmp2;
+		qNode* tmp = start;
+		qNode* tmp2;
 
 		for (unsigned int i = 1; i < x; i++)
 		{
@@ -139,7 +139,7 @@ void delAll()
 {
 	if (start != NULL)
 	{
-		node<TYPE>* tmp;
+		qNode<TYPE>* tmp;
 		while (start != NULL)
 		{
 			tmp = start;

@@ -27,12 +27,16 @@ class Tree
 
 public:
 
-	Tree(TYPE value)
+	Tree()
 	{
-		root->value = value;
 	}
 
-	tNode Add(TYPE value, tNode* father)
+	/*Tree(TYPE value)
+	{
+		root->value = value;
+	}*/
+
+	tNode add(TYPE value, tNode<TYPE>* father)
 	{
 		tNode<value>* tmp = new tNode<value>;
 		tmp->value = value;
@@ -45,8 +49,7 @@ public:
 
 		else
 		{
-			tmp->father = root;
-			root->sons->add(tmp);
+			tmp = root;
 		}
 		
 		return tmp;

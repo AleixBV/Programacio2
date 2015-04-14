@@ -10,6 +10,7 @@
 #include "../Programacio2/DoubleLinkedList.h"
 #include "../Programacio2/Stack.h"
 #include "../Programacio2/Qeue.h"
+#include "../Programacio2/Tree.h"
 
 
 
@@ -539,6 +540,26 @@ namespace UnitTestQeue
 			Assert::AreEqual((int)1, pop);
 		}
 		
+	};
+}
+
+namespace UnitTestTree
+{
+	TEST_CLASS(UnitTestTree)
+	{
+	public:
+		TEST_METHOD(tree_Add)
+		{
+			Tree<int> a;
+			tNode<int>* x;
+
+			x = a.add(1, NULL);
+			a.add(2, x);
+
+			Assert::AreEqual((int)1, x->value);
+			//Assert::AreEqual((int)2, x->sons->start->value);
+		}
+
 	};
 }
 

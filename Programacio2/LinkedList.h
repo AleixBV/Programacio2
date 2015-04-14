@@ -4,32 +4,32 @@
 #include <stdio.h>
 
 template<class TYPE>
-struct node
+struct lNode
 {
 	TYPE value;
-	node<TYPE>* next;
+	lNode<TYPE>* next;
 
-	inline node(const TYPE& _value)
+	inline lNode(const TYPE& _value)
 	{
 		value = _value;
 		next = prev = NULL;
 	}
 
-	~node()
+	~lNode()
 	{}
 };
 
 template<class TYPE>
 class SList
 {
-	node* start;
+	lNode* start;
 	SList() : start(NULL){}
 	void add(TYPE value)
 	{
-		node* newNode = new node;
-		newNode->value = value;
-		newNode->next = NULL;
-		node* tmp = start;
+		lNode* newlNode = new lNode;
+		newlNode->value = value;
+		newlNode->next = NULL;
+		lNode* tmp = start;
 
 		if (tmp != NULL){
 			while (tmp->next != NULL)
@@ -37,32 +37,32 @@ class SList
 				tmp = tmp->next;
 			}
 		}
-		tmp->next = newNode;
+		tmp->next = newlNode;
 	}
 
-	void del(node* delNode)
+	void del(lNode* dellNode)
 	{
-		if (delNode != NULL)
+		if (dellNode != NULL)
 		{
-			if (delNode != start && start != NULL)
+			if (dellNode != start && start != NULL)
 			{
-				node* tmp = start;
-				while (tmp->next != delNode)
+				lNode* tmp = start;
+				while (tmp->next != dellNode)
 				{
 					if (tmp == NULL)
 					{
-						delete delNode;
+						delete dellNode;
 						return;
 					}
 					tmp = tmp->next;
 				}
-				tmp->next = delNode->next;
+				tmp->next = dellNode->next;
 			}
 			else
 			{
 				start = start->next;
 			}
-			delete delNode;
+			delete dellNode;
 		}
 	}
 
@@ -70,8 +70,8 @@ class SList
 	{
 			if (start != NULL)
 			{
-				node* tmp = start;
-				node* tmp2;
+				lNode* tmp = start;
+				lNode* tmp2;
 				if (x == 0)
 				{
 					start = start->next;
@@ -95,7 +95,7 @@ class SList
 	{
 		if (start != NULL)
 		{
-			node* tmp = start;
+			lNode* tmp = start;
 			while (start != NULL)
 			{
 				tmp = start;
@@ -109,7 +109,7 @@ class SList
 	unsigned int count() const
 	{
 		unsigned int result = 0;
-		node* tmp = start;
+		lNode* tmp = start;
 		if (tmp != NULL)
 		{
 			while (tmp->next != NULL)
@@ -122,7 +122,6 @@ class SList
 	}
 
 };
-
 
 
 #endif

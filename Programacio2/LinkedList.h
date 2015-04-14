@@ -12,7 +12,7 @@ struct lNode
 	inline lNode(const TYPE& _value)
 	{
 		value = _value;
-		next = prev = NULL;
+		next = NULL;
 	}
 
 	~lNode()

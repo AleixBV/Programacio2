@@ -1,19 +1,20 @@
 #ifndef _Tree_
 #define _Tree_
 
-#include "LinkedList.h"
+#include "DoubleLinkedList.h"
+#include "Stack.h"
 
 template<class TYPE>
 struct tNode
 {
 	TYPE value;
 	tNode<TYPE>* father;
-	SList<tNode>* sons;
+	DSList<tNode<TYPE>*> sons;
 
 	inline tNode(const TYPE& _value)
 	{
 		value = _value;
-		next = prev = NULL;
+		father = NULL;
 	}
 
 	~tNode()
@@ -23,20 +24,18 @@ struct tNode
 template<class TYPE>
 class Tree
 {
-	tNode* root;
+	tNode<TYPE>* root;
 
 public:
 
-	Tree()
-	{
-	}
+	Tree() : root(NULL){}
 
-	/*Tree(TYPE value)
+	Tree(const TYPE& value)
 	{
 		root->value = value;
-	}*/
+	}
 
-	tNode add(TYPE value, tNode<TYPE>* father)
+	tNode<TYPE> add(const TYPE& value, tNode<TYPE>* father)
 	{
 		tNode<value>* tmp = new tNode<value>;
 		tmp->value = value;
@@ -49,11 +48,35 @@ public:
 
 		else
 		{
-			tmp = root;
+			root = tmp;
 		}
 		
 		return tmp;
 	}
+
+	void visitAllNodesPreOrder(DSList<tNode<TYPE>*>* list) const
+	{
+		list->add(value);
+
+		node<tNode<TYPE>*>* tmp = sons.start;
+
+		for (tmp; tmp != NULL; tmp = tmp->next)
+		{
+			tmp->value->visitAllNodesPreOrder(list);
+		}
+	}
+
+	void visitAllNodesPostOrder(DSList<tNode<TYPE>*>* list) const
+	{
+		node<tNode<TYPE>*>* tmp = sons.start;
+
+		for (tmp; tmp != NULL; tmp = tmp->next)
+		{
+			tmp->value->visitAllNodesPostOrder(list);
+		}
+		list->add(value);
+	}
+	
 };
 
 #endif

@@ -543,7 +543,7 @@ namespace UnitTestQeue
 	};
 }
 
-namespace UnitTestTree
+/*namespace UnitTestTree
 {
 	TEST_CLASS(UnitTestTree)
 	{
@@ -561,5 +561,5 @@ namespace UnitTestTree
 		}
 
 	};
-}
+}*/
 

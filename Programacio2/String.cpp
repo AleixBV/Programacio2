@@ -38,6 +38,16 @@ String::String(const char* format, ...)
 	}
 }
 
+String::String(unsigned int size)
+{
+	if (size > 0)
+		alloc(size);
+	else
+		alloc(1);
+
+	clear();
+}
+
 String::String(const String& s)
 {
 	size = strlen(s.string) + 1;
@@ -147,6 +157,40 @@ const String& String::operator+=(const char* s)
 	return (*this);
 }
 
+//prefix
+const String& String::prefix(const String& s)
+{
+	unsigned int need_size = s.length() + length() + 1;
+	char* tmp = string;
+
+
+	alloc(need_size);
+
+	strcpy_s(string, size, s.string);
+	strcat_s(string, size, tmp);
+	delete[] tmp;
+
+	return(*this);
+}
+
+const String& String::prefix(const char* s)
+{
+	if (s != NULL)
+	{
+		unsigned int need_size = strlen(s) + length() + 1;
+		char* tmp = string;
+
+
+		alloc(need_size);
+
+		strcpy_s(string, size, s);
+		strcat_s(string, size, tmp);
+		delete[] tmp;
+	}
+
+	return(*this);
+}
+
 //Utility
 unsigned int String::length() const
 {
@@ -169,6 +213,13 @@ void String::clear()
 	{
 		string[0] = '\0';
 	}
-
 }
+
+
+void String::alloc(unsigned int requiered_memory)
+{
+	size = requiered_memory;
+	string = new char[size];
+}
+
 

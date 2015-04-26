@@ -4,19 +4,19 @@
 #include <stdio.h>
 
 template<class TYPE>
-struct node
+struct DSLNode
 {
 	TYPE value;
-	node<TYPE>* next;
-	node<TYPE>* previous;
+	DSLNode<TYPE>* next;
+	DSLNode<TYPE>* previous;
 
-	inline node(const TYPE& _value)
+	inline DSLNode(const TYPE& _value)
 	{
-		data = _value;
+		value = _value;
 		next = previous = NULL;
 	}
 
-	~node(){}
+	~DSLNode(){}
 };
 
 template<class TYPE>
@@ -24,8 +24,8 @@ class DSList
 {
 public:
 
-	node<TYPE>* start;
-	node<TYPE>* end;
+	DSLNode<TYPE>* start;
+	DSLNode<TYPE>* end;
 
 private:
 
@@ -34,7 +34,7 @@ private:
 public:
 
 	//Constructor
-	DSList() : start(NULL), end(NULL){}
+	DSList() : start(NULL), end(NULL), size(0){}
 
 	//Destructor
 	~DSList()
@@ -51,48 +51,48 @@ public:
 	//Add new item
 	unsigned int add(const TYPE& value)
 	{
-		node<TYPE>* newNode = new node<TYPE>;
-		newNode->value = value;
+		DSLNode<TYPE>* newDSLNode;
+		newDSLNode = new DSLNode<TYPE>(value);
 
 		if (start == NULL)
 		{
-			start = end = newNode;
+			start = end = newDSLNode;
 		}
 		else
 		{
-			newNode->previous = end;
-			end->next = newNode;
-			end = newNode;
+			newDSLNode->previous = end;
+			end->next = newDSLNode;
+			end = newDSLNode;
 		}
 		return(++size);
 	}
 
 	//Deletes an item from the list
-	bool del(node<TYPE>* delNode)
+	bool del(DSLNode<TYPE>* delDSLNode)
 	{
-		if (delNode == NULL || start == NULL || end == NULL)
+		if (delDSLNode == NULL || start == NULL || end == NULL)
 		{
 			return false;
 		}
 		else
 		{
-			if (delNode != start || delNode != end)
+			if (delDSLNode != start || delDSLNode != end)
 			{
-				node* tmp = start;
-				while (tmp->next != delNode)
+				DSLNode* tmp = start;
+				while (tmp->next != delDSLNode)
 				{
 					if (tmp == NULL)
 					{
-						delete delNode;
+						delete delDSLNode;
 						return;
 					}
 					tmp = tmp->next;
 				}
-				tmp->next = delNode->next;
+				tmp->next = delDSLNode->next;
 				tmp = tmp->next;
-				tmp->previous = delNode->previous;
+				tmp->previous = delDSLNode->previous;
 			}
-			else if (delNode == start)
+			else if (delDSLNode == start)
 			{
 				start = start->next;
 				start->previous = NULL;
@@ -102,7 +102,7 @@ public:
 				end = end->previous;
 				end->next = NULL;
 			}
-			delete delNode;
+			delete delDSLNode;
 			--size;
 			return(true);
 		}
@@ -122,8 +122,8 @@ public:
 				return(true);
 			}
 
-			node* tmp = start;
-			node* tmp2;
+			DSLNode* tmp = start;
+			DSLNode* tmp2;
 			
 			for (unsigned int i = 1; i < x; i++)
 			{
@@ -151,13 +151,42 @@ public:
 		return(true)
 	}
 
+	//delNodes
+	void delNodes(unsigned int position, unsigned int quantity)
+	{
+		DSLNode<TYPE>*   p_value;
+		DSLNode<TYPE>*   p_next;
+		p_value = start;
+
+		unsigned int pos = 0;
+		unsigned int q = 0;
+		while (p_value != NULL)
+		{
+			p_next = p_value->next;
+			if (pos >= position || q <= quantity)
+			{
+				delete p_value;
+				q++;
+			}
+			pos++;
+			p_value = p_next;
+		}
+		if (position == 0)
+		{
+			start = end = p_value->previous;
+		}
+
+		start = end = NULL;
+		size -= quantity;
+	}
+
 
 	//Destroy and free all mem
 	void delAll()
 	{
 		if (start != NULL)
 		{
-			node<TYPE>* tmp;
+			DSLNode<TYPE>* tmp;
 			while (start != NULL)
 			{
 				tmp = start;

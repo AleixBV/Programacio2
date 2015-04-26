@@ -20,6 +20,8 @@ public:
 
 	String(const char* format, ...);
 
+	String(unsigned int size);
+
 	String(const String& s);
 
 	~String();
@@ -41,6 +43,11 @@ public:
 
 	const String& operator+=(const char* s);
 
+
+	const String& prefix(const String& s);
+
+	const String& prefix(const char* s);
+
 	//Utility
 	unsigned int length() const;
 
@@ -49,6 +56,9 @@ public:
 	const char* getString() const;
 
 	void clear();
+
+
+	void alloc(unsigned int requiered_memory);
 };
 
 #endif

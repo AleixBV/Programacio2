@@ -4,9 +4,7 @@
 #include "../Programacio2/Projectile.h"
 #include "../Programacio2/Point2fTemplate.h"
 #include "../Programacio2/String.cpp"
-#include "../Programacio2/p2SString.h"
 #include "../Programacio2/DynamicArray.h"
-#include "../Programacio2/p2List.h"
 #include "../Programacio2/DoubleLinkedList.h"
 #include "../Programacio2/Stack.h"
 #include "../Programacio2/Qeue.h"
@@ -435,57 +433,45 @@ namespace UnitTestExam
 			Assert::AreEqual((int)3, array[2]);
 		}
 		// P2List delete few nodes ----------------------------------------
-		TEST_METHOD(p2List_delNodes_mid)
+		TEST_METHOD(DoubleLinkedList_delNodes_mid)
 		{
-			p2List<int> l;
+			DSList<int> l;
 			l.add(1);
 			l.add(2);
 			l.add(3);
 			l.add(4);
 			l.delNodes(1, 2);
-			Assert::AreEqual((int)1, l.start->data);
-			Assert::AreEqual((int)4, l.end->data);
+			Assert::AreEqual((int)1, l.start->value);
+			Assert::AreEqual((int)4, l.end->value);
 			Assert::AreEqual((unsigned int)2, l.count());
 		}
 		// P2List delete few nodes ----------------------------------------
-		TEST_METHOD(p2List_delNodes_begin)
+		TEST_METHOD(DoubleLinkedList_delNodes_begin)
 		{
-			p2List<int> l;
+			DSList<int> l;
 			l.add(1);
 			l.add(2);
 			l.add(3);
 			l.add(4);
 			l.delNodes(0, 3);
-			Assert::AreEqual((int)4, l.start->data);
-			Assert::AreEqual((int)4, l.end->data);
+			Assert::AreEqual((int)4, l.start->value);
+			Assert::AreEqual((int)4, l.end->value);
 			Assert::AreEqual((unsigned int)1, l.count());
 		}
 		// P2List delete few nodes ----------------------------------------
-		TEST_METHOD(p2List_delNodes_end)
+		TEST_METHOD(DoubleLinkedList_delNodes_end)
 		{
-			p2List<int> l;
+			DSList<int> l;
 			l.add(1);
 			l.add(2);
 			l.add(3);
 			l.add(4);
 			l.delNodes(2, 100);
-			Assert::AreEqual((int)1, l.start->data);
-			Assert::AreEqual((int)2, l.end->data);
+			Assert::AreEqual((int)1, l.start->value);
+			Assert::AreEqual((int)2, l.end->value);
 			Assert::AreEqual((unsigned int)2, l.count());
 		}
 		TEST_METHOD(String_prefix)
-		{
-			p2SString a("1234567890");
-			p2SString b(50);
-			b = "hola";
-			a.prefix(b);
-			b.prefix("1234567890");
-			Assert::AreEqual(strcmp(a.GetString(), "hola1234567890"), 0);
-			Assert::AreEqual(strcmp(b.GetString(), "1234567890hola"), 0);
-		}
-
-		// String prefix ----------------------------------------
-		/*TEST_METHOD(String_prefix)
 		{
 			String a("1234567890");
 			String b(50);
@@ -494,7 +480,8 @@ namespace UnitTestExam
 			b.prefix("1234567890");
 			Assert::AreEqual(strcmp(a.getString(), "hola1234567890"), 0);
 			Assert::AreEqual(strcmp(b.getString(), "1234567890hola"), 0);
-		}*/
+		}
+
 	};
 }
 

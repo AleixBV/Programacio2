@@ -48,6 +48,23 @@ public:
 		return size;
 	}
 
+	//find node
+	int find(const TYPE& value)
+	{
+		DSLNode<TYPE>* tmp = start;
+		int index = 0;
+
+		while (tmp != NULL)
+		{
+			if (tmp->value == value)
+				return(index);
+
+			index++;
+			tmp = tmp->next;
+		}
+		return (-1);
+	}
+
 	//Add new item
 	unsigned int add(const TYPE& value)
 	{

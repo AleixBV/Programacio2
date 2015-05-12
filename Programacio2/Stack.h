@@ -96,7 +96,7 @@ public:
 		return(lastAllocatedMemory - allocatedMemory);
 	}
 
-	//
+	//Utilities
 
 	unsigned int getCapacity() const
 	{

@@ -1,12 +1,14 @@
-#ifndef _Stack_
-#define _Stack_
+#ifndef _BubbleSort_
+#define _BubbleSort_
+
+#include "Utilities.h"
 
 #include <stdio.h>
 #include <assert.h>
 
 
 template<class TYPE>
-class Stack
+class BubbleSort
 {
 private:
 	TYPE* data;
@@ -15,15 +17,15 @@ private:
 
 public:
 	//Constructors
-	Stack() : data(NULL), allocatedMemory(0), numElements(0){}
+	BubbleSort() : data(NULL), allocatedMemory(0), numElements(0){}
 
-	Stack(unsigned int memSize) : data(NULL), numElements(0)
+	BubbleSort(unsigned int memSize) : data(NULL), numElements(0)
 	{
 		reallocate(memSize);
 	}
 
 	//Destructor
-	~Stack()
+	~BubbleSort()
 	{
 		if (data != NULL)
 			delete[] data;
@@ -67,6 +69,34 @@ public:
 		numElements = 0;
 	}
 
+	bool insert(const TYPE& value, unsigned int position)
+	{
+		if (position > numElements)
+		{
+			return false;
+		}
+
+		if (position == numElements)
+		{
+			pushBack(value);
+			return true;
+		}
+
+		if (numElements + 1 > allocatedMemory)
+		{
+			reallocate(allocatedMemory + (numElements + 1 - allocatedMemory));
+		}
+
+		for (unsigned int i = numElements; i > position; --i)
+		{
+			data[i] = data[i - 1];
+		}
+		data[position] = value;
+		++numElements;
+
+		return true;
+	}
+
 	TYPE* at(unsigned int index)
 	{
 		TYPE* result = NULL;
@@ -87,17 +117,63 @@ public:
 		return result;
 	}
 
+	unsigned int DoBubbleSort()
+	{
+		unsigned int ifs = 0;
+		bool repeat = true;
+
+		while (repeat)
+		{
+			repeat = false;
+			for (unsigned int i = 0; i < (numElements - 1); i++)
+			{
+				ifs++;
+				if (data[i] > data[(i + 1)])
+				{
+					swap(data[i], data[(i + 1)]);
+					repeat = true;
+				}
+			}
+		}
+		return ifs;
+	}
+
+	unsigned int DoBubbleSortBetter()
+	{
+		unsigned int ifs = 0;
+		bool repeat = true;
+		unsigned int lastSwap = numElements;
+		unsigned int lastSwapCount = numElements;
+
+		while (repeat)
+		{
+			repeat = false;
+			for (unsigned int i = 0; i < (lastSwap - 1); i++)
+			{
+				ifs++;
+				if (data[i] > data[(i + 1)])
+				{
+					swap(data[i], data[(i + 1)]);
+					repeat = true;
+					lastSwapCount = i - 1;
+				}
+			}
+			lastSwap = lastSwapCount;
+		}
+		return ifs;
+	}//
+
+
 	//removeWastedMemory
 	const unsigned int removeWastedMemory()
 	{
 		unsigned int lastAllocatedMemory = allocatedMemory;
-		Stack<TYPE> tmp(count());
+		DynArray<TYPE> tmp(count());
 		reallocate(count());
 		return(lastAllocatedMemory - allocatedMemory);
 	}
 
-	//
-
+	//Utilities
 	unsigned int getCapacity() const
 	{
 		return allocatedMemory;
@@ -129,5 +205,6 @@ private:
 		}
 	}
 };
+
 
 #endif

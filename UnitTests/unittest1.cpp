@@ -9,6 +9,7 @@
 #include "../Programacio2/Stack.h"
 #include "../Programacio2/Qeue.h"
 #include "../Programacio2/Tree.h"
+#include "../Programacio2/BubbleSort.h"
 
 
 
@@ -550,3 +551,29 @@ namespace UnitTestQeue
 	};
 }*/
 
+
+// BubbleSort  ----------------------------------------
+namespace Bubble_Sort
+{
+	TEST_CLASS(Bubble_Sort)
+	{
+	public:
+		TEST_METHOD(Bubble_Sort_Test)
+		{
+			BubbleSort<int> array(4);
+			array.pushBack(3);
+			array.pushBack(2);
+			array.pushBack(1);
+
+			Assert::AreEqual((unsigned int)4, array.getCapacity());
+
+			Assert::AreEqual((unsigned int)3, array.count());
+
+			array.DoBubbleSort();
+
+			Assert::AreEqual((int)1, array[0]);
+			Assert::AreEqual((int)2, array[1]);
+			Assert::AreEqual((int)3, array[2]);
+		}
+	};
+}

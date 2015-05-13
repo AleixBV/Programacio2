@@ -163,6 +163,34 @@ public:
 		return ifs;
 	}//
 
+	unsigned int CombSort()
+	{
+		unsigned int ifs = 0;
+		bool repeat = true;
+		unsigned int compare = 1;
+
+		compare = numElements * 0.7;
+
+		while (repeat)
+		{
+			repeat = false;
+			for (unsigned int i = 0; i < (numElements - compare); i++)
+			{
+				ifs++;
+				if (data[i] > data[(i + compare)])
+				{
+					swap(data[i], data[(i + compare)]);
+					repeat = true;
+				}
+			}
+			if (compare > 1)
+			{
+				compare--;
+				repeat = true;//sino podria quedar desordenat igualment (?)
+			}
+		}
+		return ifs;
+	}
 
 	//removeWastedMemory
 	const unsigned int removeWastedMemory()

@@ -7,19 +7,23 @@
 int main()
 {
 	BubbleSort<int> array(10001);
+	BubbleSort<int> array1(10001);
+	BubbleSort<int> array2(10001);
 
 	srand(time(NULL));
 
-	for (unsigned int i = 0; i < 9999; i++)
+	for (unsigned int i = 0; i < 10000; i++)
 	{
 		array.pushBack(rand());
+		array1.pushBack(rand());
+		array2.pushBack(rand());
 	}
 
-	//int x = array.DoBubbleSort();
-	int y = array.DoBubbleSortBetter();
+	int x = array.DoBubbleSort();
+	int y = array1.DoBubbleSortBetter();
+	int z = array2.CombSort();
 
-	//printf("Standart bubble sort: %i", x);
-	printf("\nBetter bubble sort: %i", y);
+	printf("Standart bubble sort: %i\nBetter bubble sort: %i\nCombSort: %i",x, y, z);
 	getchar();
 }
 

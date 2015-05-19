@@ -48,6 +48,31 @@ public:
 		return size;
 	}
 
+	//operators
+	TYPE& operator[](unsigned int index)
+	{
+		DSLNode<TYPE>* tmp = start;
+		assert(index < size);
+		
+		for (unsigned int i = index; i > 0; i--)
+		{
+			tmp = tmp->next;
+		}
+		return tmp->value;
+	}
+
+	const TYPE& operator[](unsigned int index) const
+	{
+		DSLNode<TYPE>* tmp = start;
+		assert(index < size);
+
+		for (unsigned int i = index; i > 0; i--)
+		{
+			tmp = tmp->next;
+		}
+		return tmp->value;
+	}
+
 	//find node
 	int find(const TYPE& value)
 	{
@@ -82,6 +107,48 @@ public:
 			end = newDSLNode;
 		}
 		return(++size);
+	}
+
+	//Bubblesort
+	unsigned int DoBubbleSort()
+	{
+		unsigned int ifs = 0;
+		bool repeat = true;
+		DSLNode<TYPE>* tmp = start;
+
+		while (repeat)
+		{
+			repeat = false;
+			//for (unsigned int i = 0; i < (size - 1); i++)
+			while (tmp != NULL && tmp->next != NULL)
+			{
+				ifs++;
+				if (tmp->value > tmp->next->value)
+				{
+					//swap(tmp->value, tmp->next->value);
+					if (tmp->previous != NULL)
+						tmp->previous->next = tmp->next;
+
+					else
+						start = tmp->next;
+
+					tmp->next->previous = tmp->previous;
+					tmp->previous = tmp->next;
+					tmp->next = tmp->next->next;
+					tmp->previous->next = tmp;
+
+					if (tmp->next != NULL)
+						tmp->next->previous = tmp;
+
+					else
+						end = tmp;
+
+					repeat = true;
+				}
+				tmp = tmp->next;
+			}
+		}
+		return ifs;
 	}
 
 	//Deletes an item from the list

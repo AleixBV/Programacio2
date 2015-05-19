@@ -24,6 +24,10 @@ int main()
 	int z = array2.CombSort();
 
 	printf("Standart bubble sort: %i\nBetter bubble sort: %i\nCombSort: %i",x, y, z);
+
+	unsigned int f = fib(4);
+	printf("%i", f);
+
 	getchar();
 }
 

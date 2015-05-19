@@ -577,3 +577,69 @@ namespace Bubble_Sort
 		}
 	};
 }
+
+// DoubleLinkedList  ----------------------------------------
+namespace DoubleLinkedList
+{
+	TEST_CLASS(DoubleLinkedList_operator)
+	{
+	public:
+		TEST_METHOD(DoubleLinkedList_operator_Test)
+		{
+			DSList<int> array;
+			array.add(3);
+			array.add(2);
+			array.add(1);
+
+			Assert::AreEqual((int)3, array[0]);
+			Assert::AreEqual((int)2, array[1]);
+			Assert::AreEqual((int)1, array[2]);
+		}
+	};
+
+	TEST_CLASS(DoubleLinkedList_BubbleSort)
+	{
+	public:
+		TEST_METHOD(DoubleLinkedList_BubbleSort_Test)
+		{
+			DSList<int> array;
+			array.add(1);
+			array.add(3);
+			array.add(2);
+
+			array.DoBubbleSort();
+
+
+			Assert::AreEqual((int)1, array[0]);
+			Assert::AreEqual((int)2, array[1]);
+			Assert::AreEqual((int)3, array[2]);
+		}
+	};
+
+}
+
+// DynamicArray_mirror  ----------------------------------------
+namespace DynamicArray
+{
+	TEST_CLASS(DynamicArray_mirror)
+	{
+	public:
+		TEST_METHOD(DynamicArray_mirror_Test)
+		{
+			DynArray<int> array(4);
+			array.pushBack(3);
+			array.pushBack(2);
+			array.pushBack(1);
+
+			Assert::AreEqual((unsigned int)4, array.getCapacity());
+
+			Assert::AreEqual((unsigned int)3, array.count());
+
+			array.mirror();
+
+			Assert::AreEqual((int)1, array[0]);
+			Assert::AreEqual((int)2, array[1]);
+			Assert::AreEqual((int)3, array[2]);
+		}
+	};
+}

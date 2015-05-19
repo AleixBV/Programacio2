@@ -115,6 +115,17 @@ public:
 		return result;
 	}
 
+	//mirror
+	void mirror()
+	{
+		unsigned int x = 0;
+		for (unsigned int i = (numElements / 2); i > 0; i--)
+		{
+			swap(data[numElements - 1 - x], data[x]);
+			x++;
+		}
+	}
+
 	//removeWastedMemory
 	const unsigned int removeWastedMemory()
 	{

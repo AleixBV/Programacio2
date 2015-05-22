@@ -25,8 +25,8 @@ int main()
 
 	printf("Standart bubble sort: %i\nBetter bubble sort: %i\nCombSort: %i",x, y, z);
 
-	unsigned int f = fib(4);
-	printf("%i", f);
+	unsigned int f = fib(5);
+	printf("\n\n%i", f);
 
 	getchar();
 }

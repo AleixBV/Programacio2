@@ -126,6 +126,29 @@ public:
 		}
 	}
 
+	//insertarray
+	bool insertDynArray(DynArray<TYPE>& toAdd, unsigned int position)
+	{
+		if (position > numElements)
+		{
+			return false;
+		}
+
+		if (numElements + toAdd.numElements > allocatedMemory)
+		{
+			reallocate(numElements + toAdd.numElements + 1);
+		}
+
+		for (unsigned int i = position; i < position + toAdd.numElements; i++)
+		{
+			data[i + toAdd.numElements] = data[i];
+			data[i] = toAdd[i - position];
+			numElements++;
+		}
+
+		return true;
+	}
+
 	//removeWastedMemory
 	const unsigned int removeWastedMemory()
 	{

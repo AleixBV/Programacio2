@@ -215,6 +215,71 @@ void String::clear()
 	}
 }
 
+unsigned int String::find(const String& s) const
+{
+	unsigned int x = 0;
+
+	for (unsigned int i = 0; i <= capacity() - s.capacity(); i++)
+	{
+		if (string[i] == s.string[0])
+		{
+			
+			if (strncmp(string, s.string, s.capacity()))
+			{
+				i += s.capacity();
+				x++;
+			}
+		}
+	}
+	return x;
+}
+
+unsigned int String::find(const char* s) const
+{
+	unsigned int x = 0;
+
+	unsigned int sCapacity = strlen(s);
+
+	for (unsigned int i = 0; i <= capacity() - sCapacity; i++)
+	{
+		if (string[i] == s[0])
+		{
+			if (strncmp(string, s, sCapacity))
+			{
+				i += sCapacity;
+				x++;
+			}
+		}
+	}
+	return x;
+}
+
+/*unsigned int String::find(const String& s) const
+{
+	unsigned int x = 0;
+
+	for (unsigned int i = 0; i < capacity(); i++)
+	{
+		if (string[i] == s.string[0])
+		{
+			unsigned int count = 1;
+			for (unsigned int u = 1; u < s.capacity(); u++)
+			{
+				i++;
+				if (string[i] == s.string[u])
+				{
+					count++;
+					if (count == s.capacity())
+					{
+						x++;
+					}
+				}
+			}
+		}
+	}
+	return x;
+}*/
+
 
 void String::alloc(unsigned int requiered_memory)
 {

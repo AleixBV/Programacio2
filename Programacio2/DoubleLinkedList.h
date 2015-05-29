@@ -151,6 +151,30 @@ public:
 		return ifs;
 	}
 
+	//operator +=
+	const DSList<TYPE>& operator+=(DSList<TYPE>& toAdd)//toAdd no es const pk size es privat (fer Count)
+	{
+		if (toAdd.start != NULL)
+		{
+			for (unsigned int i = 0; i < toAdd.count(); i++)
+			{
+				add(toAdd[i]);
+			}
+		}
+		return (*this);
+	}
+
+	const DSList<TYPE>& operator+=(const DSList<TYPE>& toAdd)
+	{
+		DSLNode<TYPE>* tmpToAdd = toAdd.start;
+		while (tmpToAdd != NULL)
+		{
+			add(tmpToAdd->value);
+			tmpToAdd = tmpToAdd->next;
+		}
+		return (*this);
+	}
+
 	//Deletes an item from the list
 	bool del(DSLNode<TYPE>* delDSLNode)
 	{

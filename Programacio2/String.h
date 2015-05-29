@@ -57,6 +57,10 @@ public:
 
 	void clear();
 
+	unsigned int find(const String& s) const;
+
+	unsigned int find(const char* s) const;
+
 
 	void alloc(unsigned int requiered_memory);
 };

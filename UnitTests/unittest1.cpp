@@ -616,6 +616,31 @@ namespace DoubleLinkedList
 		}
 	};
 
+	TEST_CLASS(DoubleLinkedList_operatorPlusEqual)
+	{
+	public:
+		TEST_METHOD(DoubleLinkedList_operatorPlusEqualTest)
+		{
+			DSList<int> a;
+			a.add(1);
+			a.add(2);
+			a.add(3);
+
+			DSList<int> b;
+			b.add(4);
+			b.add(5);
+			b.add(6);
+
+			a += b;
+
+			Assert::AreEqual((int)1, a[0]);
+			Assert::AreEqual((int)2, a[1]);
+			Assert::AreEqual((int)3, a[2]);
+			Assert::AreEqual((int)4, a[3]);
+			Assert::AreEqual((int)5, a[4]);
+			Assert::AreEqual((int)6, a[5]);
+		}
+	};
 }
 
 // DynamicArray_mirror  ----------------------------------------
@@ -640,6 +665,48 @@ namespace DynamicArray
 			Assert::AreEqual((int)1, array[0]);
 			Assert::AreEqual((int)2, array[1]);
 			Assert::AreEqual((int)3, array[2]);
+		}
+	};
+
+	TEST_CLASS(DynamicArray_insertDynArray)
+	{
+	public:
+		TEST_METHOD(DynamicArray_insertDynArray_Test)
+		{
+			DynArray<int> array(4);
+			array.pushBack(1);
+			array.pushBack(2);
+			array.pushBack(5);
+
+			DynArray<int> array2(3);
+			array2.pushBack(3);
+			array2.pushBack(4);
+
+			array.insertDynArray(array2, 2);
+
+			Assert::AreEqual((int)1, array[0]);
+			Assert::AreEqual((int)2, array[1]);
+			Assert::AreEqual((int)3, array[2]);
+			Assert::AreEqual((int)4, array[3]);
+			Assert::AreEqual((int)5, array[4]);
+		}
+	};
+}
+
+// String_find  ----------------------------------------
+namespace StringTest
+{
+	TEST_CLASS(String_find)
+	{
+	public:
+		TEST_METHOD(String_find_Test)
+		{
+			String s("hola mundo hola mundo hola");
+
+			Assert::AreEqual((int)3, (int)s.find("hola"));
+			Assert::AreEqual((int)2, (int)s.find("mundo"));
+			Assert::AreEqual((int)0, (int)s.find("error"));
+			Assert::AreEqual((int)4, (int)s.find(" "));
 		}
 	};
 }

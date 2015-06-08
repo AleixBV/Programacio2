@@ -215,7 +215,7 @@ void String::clear()
 	}
 }
 
-unsigned int String::find(const String& s) const
+/*unsigned int String::find(const String& s) const
 {
 	unsigned int x = 0;
 
@@ -252,9 +252,9 @@ unsigned int String::find(const char* s) const
 		}
 	}
 	return x;
-}
+}*/
 
-/*unsigned int String::find(const String& s) const
+unsigned int String::find(const String& s) const
 {
 	unsigned int x = 0;
 
@@ -262,23 +262,67 @@ unsigned int String::find(const char* s) const
 	{
 		if (string[i] == s.string[0])
 		{
-			unsigned int count = 1;
-			for (unsigned int u = 1; u < s.capacity(); u++)
+			if (s.capacity() > 1)
 			{
-				i++;
-				if (string[i] == s.string[u])
+				unsigned int count = 1;
+				for (unsigned int u = 1; u < s.capacity(); u++)
 				{
-					count++;
-					if (count == s.capacity())
+					i++;
+					if (string[i] == s.string[u])
 					{
-						x++;
+						count++;
+						if (count == s.capacity())
+						{
+							x++;
+						}
 					}
 				}
+			}
+			else
+			{
+				x++;
 			}
 		}
 	}
 	return x;
-}*/
+}
+
+unsigned int String::find(const char* s) const
+{
+	unsigned int x = 0;
+
+
+	unsigned int sCapacity = strlen(s);
+
+	for (unsigned int i = 0; i < capacity(); i++)
+	{
+		if (string[i] == s[0])
+		{
+			if (sCapacity > 1)
+			{
+				unsigned int count = 1;
+				for (unsigned int u = 1; u < sCapacity; u++)
+				{
+					unsigned int ii = i + 1;;
+					if (string[ii] == s[u])
+					{
+						count++;
+						if (count == sCapacity)
+						{
+							x++;
+						}
+					}
+					i++;
+				}
+			}
+			else
+			{
+				x++;
+			}
+		}
+	}
+	return x;
+}
 
 
 void String::alloc(unsigned int requiered_memory)

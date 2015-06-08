@@ -184,15 +184,14 @@ public:
 		}
 		else
 		{
-			if (delDSLNode != start || delDSLNode != end)
+			if (delDSLNode != start && delDSLNode != end)
 			{
-				DSLNode* tmp = start;
-				while (tmp->next != delDSLNode)
+				DSLNode<TYPE>* tmp = start;
+				while (tmp != delDSLNode)
 				{
 					if (tmp == NULL)
 					{
-						delete delDSLNode;
-						return;
+						return false;
 					}
 					tmp = tmp->next;
 				}
@@ -210,13 +209,12 @@ public:
 				end = end->previous;
 				end->next = NULL;
 			}
-			delete delDSLNode;
 			--size;
-			return(true);
+			return true;
 		}
 	}
 
-	bool del(unsigned int x)
+	/*bool del(unsigned int x)
 	{
 		if (start == NULL || end == NULL)
 		{
@@ -224,29 +222,31 @@ public:
 		}
 		else
 		{
+
+			DSLNode<TYPE>* tmp = start;
+
 			if (x == 0)
 			{
 				start = start->next;
-				return(true);
+				start->previous = NULL;
+				size--;
+				return true;
 			}
-
-			DSLNode* tmp = start;
-			DSLNode* tmp2;
 			
-			for (unsigned int i = 1; i < x; i++)
+			for (unsigned int i = 0; i < x; i++)
 			{
 				if (tmp == NULL)
 				{
-					return(false);
+					return false;
 				}
 				tmp = tmp->next;
 			}
-			tmp2 = tmp->next;
-			if (tmp2->next != NULL)
+
+			if (tmp->next != NULL)
 			{
-				tmp->next = tmp2->next;
-				tmp = tmp2->next;
-				tmp->previous = tmp2->previous;
+
+				tmp->previous->next = tmp->next;
+				tmp->next->previous = tmp->previous;
 			}
 			else
 			{
@@ -254,13 +254,12 @@ public:
 				end->next = NULL;
 			}
 		}
-		delete tmp2;
 		--size;
-		return(true)
-	}
+		return true;
+	}*/
 
 	//delNodes
-	void delNodes(unsigned int position, unsigned int quantity)
+	/*void delNodes(unsigned int position, unsigned int quantity)
 	{
 		DSLNode<TYPE>*   p_value;
 		DSLNode<TYPE>*   p_next;
@@ -286,6 +285,34 @@ public:
 
 		start = end = NULL;
 		size -= quantity;
+	}*/
+
+	void delNodes(unsigned int position, unsigned int quantity)
+	{
+		DSLNode<TYPE>*   p_value = start;
+
+		unsigned int pos = 0;
+		unsigned int q = 0;
+		while (p_value != NULL && q < quantity)
+		{
+			if (pos >= position && q < quantity)
+			{
+				del(p_value);
+				q++;
+			}
+			pos++;
+
+			p_value = p_value->next;
+		}
+		/*if (position == 0)
+		{
+			start = p_value;
+		}
+
+		if (position + quantity + 1 == size)
+		{
+			end = p_value;
+		}*/
 	}
 
 

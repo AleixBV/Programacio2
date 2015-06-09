@@ -57,6 +57,8 @@ public:
 
 	void clear();
 
+	void cut(unsigned int first, unsigned int last);
+
 	unsigned int find(const String& s) const;
 
 	unsigned int find(const char* s) const;

@@ -32,15 +32,27 @@ public:
 	//Operators
 	TYPE& operator[] (unsigned int index) //modificar
 	{
-		assert(index < numElements);
+		assert(index <= numElements);
 		return data[index];
 	}
 
 	const TYPE& operator[] (unsigned int index) const //lectura
 	{
-		assert(index < numElements);
+		assert(index <= numElements);
 		return data[index];
 	}
+
+	const DynArray<TYPE>& operator+=(const DynArray<TYPE>& toAdd)
+	{
+		if ((numElements + toAdd.numElements + 1) > allocatedMemory)
+			reallocate(allocatedMemory + toAdd.numElements);
+
+		for (unsigned int i = 0; i < toAdd.numElements; i++)
+			pushBack(toAdd[i]);
+
+		return (*this);
+	}
+
 
 	//Data Managment
 	void pushBack(const TYPE& value)

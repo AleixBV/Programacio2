@@ -22,8 +22,11 @@ struct lNode
 template<class TYPE>
 class SList
 {
+public:
 	lNode* start;
+	
 	SList() : start(NULL){}
+
 	void add(TYPE value)
 	{
 		lNode* newlNode = new lNode;

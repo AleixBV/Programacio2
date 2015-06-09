@@ -76,6 +76,7 @@
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="p2List.h" />
     <ClInclude Include="Point2f.h" />
     <ClInclude Include="Point2fTemplate.h" />
     <ClInclude Include="Projectile.h" />

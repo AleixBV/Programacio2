@@ -215,6 +215,28 @@ void String::clear()
 	}
 }
 
+void String::cut(unsigned int first, unsigned int last)
+{
+	if (string != NULL)
+	{
+		if (last == 0)
+		{
+			last = size;
+		}
+
+		unsigned int x = last + 1;
+		for (unsigned int i = first; i < size; i++, x++)
+		{
+			if (x < size)
+				string[i] = string[x];
+
+			else
+				string[i] = NULL;
+		}
+		size = strlen(string) + 1;
+	}
+}
+
 /*unsigned int String::find(const String& s) const
 {
 	unsigned int x = 0;

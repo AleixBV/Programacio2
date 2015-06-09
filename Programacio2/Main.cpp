@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include "BubbleSort.h"
+#include "String.h"
+#include "p2List.h"
 
 
 int main()
 {
-	BubbleSort<int> array(10001);
+	/*BubbleSort<int> array(10001);
 	BubbleSort<int> array1(10001);
 	BubbleSort<int> array2(10001);
 
@@ -26,7 +28,23 @@ int main()
 	printf("Standart bubble sort: %i\nBetter bubble sort: %i\nCombSort: %i",x, y, z);
 
 	unsigned int f = fib(5);
-	printf("\n\n%i", f);
+	printf("\n\n%i", f);*/
+
+	String s1("Hola mundo");
+
+	printf("%i\n\n", s1.size);
+
+	s1.cut(2, 5);
+
+	printf(s1.string);
+
+	printf("\n\n%i\n\n", s1.size);
+
+	s1.cut(3, 0);
+
+	printf(s1.string);
+
+	printf("\n\n%i", s1.size);
 
 	getchar();
 }
